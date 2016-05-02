@@ -1,0 +1,45 @@
+<h2>Enter your Event Info</h3>
+<%= form_for @event do |f| %>
+  <p>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </p>
+
+  <p>
+    <%= f.label :host %>
+    <%= f.text_field :host %>
+  </p>
+
+  </p>
+    <%= f.label :date %>
+    <%= f.datetime_select :datetime %>
+  </p>
+
+  <p>Address</p>
+  <p>
+    <%= f.label :street %>
+    <%= f.text_field :street, size: 45 %>
+  </p>
+
+  <p>
+    <%= f.label :city %>
+    <%= f.text_field :city %>
+    <%= f.label :state %>
+    <%= f.text_field :state %>
+  </p>
+
+  <p>
+    <%= f.label :zip %>
+    <%= f.number_field :zip %>
+  </p>
+
+  <p>
+    <%= f.label :description %>
+  </p>
+
+  <p>
+    <%= f.text_area :description, cols: "50", rows: "5" %>
+  </p>
+
+  <p><%= f.submit %></p>
+<% end %>

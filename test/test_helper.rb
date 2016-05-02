@@ -4,7 +4,7 @@ require 'rails/test_help'
 require 'capybara/rails'
 
 class ActionDispatch::IntegrationTest
-  require Capybara::DSL
+  include Capybara::DSL
 end
 
 class ActiveSupport::TestCase

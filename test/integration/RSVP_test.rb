@@ -1,19 +1,27 @@
-require "test_helper"
+require 'test_helper'
 
 class UserIntegrationTest < ActionDispatch::IntegrationTest
-  def test_user_can_create_an_event
-		# As someone who hosts events,
-		# I want a convenient way to invite people
-		# and know who is planning on attending.
-		# When I go to the main page of the site,
-		# I see form that lets me enter details for my event.
-		# I enter "Josh's Birthday Party" for the title
-		# And I enter "14 March 2017" for the date
-		# And I enter "8:00 PM" for the time
-		# And I enter "8492 Main st." for the location
-		# And I enter "Come celebrate my birthday!" for the description
-		# When I submit the form
-		# I see that I'm on a page where I can sign up.
+  def test_the_host_can_create_an_event
+    page.visit events_path
+    assert page.has_content?("Title")
+    assert page.has_content?("Host")
+    assert page.has_content?("Date")
+    assert page.has_content?("Address")
+    assert page.has_button?("Create Event")
+
+    page.fill_in("event_title", with: "My Day of Love!")
+    page.fill_in("event_host", with: "Herman")
+    page.fill_in("event_street", with: "1313 Mockingbird Ln")
+    page.fill_in("event_city", with: "Oakland")
+    page.fill_in("event_state", with: "CA")
+    page.fill_in("event_zip", with: "94609")
+    page.fill_in("event_description", with: "Come show me how much I rock!")
+    page.click_button("Create Event")
+
+    assert page.has_content?("My Day of Love!")
+    assert page.has_content?("Herman")
+    assert page.has_content?("1313 Mockingbird Ln")
+    assert page.has_content?("Come show me how much I rock!")
   end
 
   def test_an_attendee_can_RSVP_for_an_event
