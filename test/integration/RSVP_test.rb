@@ -24,20 +24,17 @@ class UserIntegrationTest < ActionDispatch::IntegrationTest
     assert page.has_content?("Come show me how much I rock!")
   end
 
-  def test_an_attendee_can_RSVP_for_an_event
-    skip
-		# As someone who wants to attend Josh's birthday party
-		# When he gives me a link to the event
-		# I see the title is "Josh's Birthday Party"
-		# And I see the date is "14 March 2017"
-		# And I see the time is "8:00 PM"
-		# And I see the location is "8492 Main st."
-		# And I see the description is "Come celebrate my birthday!"
-		# I see that there are no attendees
-		# I see a form where I can RSVP
-		# When I enter "Brant Faulkner" into the form and submit it
-		# Then am left on the same page
-		# But now I see that "Brant Faulkner" is listed as an attendee
-		# Other
+  def test_an_guest_can_RSVP_for_an_event
+    event = Event.create!(title: "Josh's Birthday Party",
+                          description: "Come celebrate my birthday")
+    page.visit event_path event
+
+    assert page.has_content?("Josh's Birthday Party")
+    assert page.has_content?("Come celebrate my birthday")
+    assert page.has_button?("RSVP")
+
+    page.fill_in("attendee_name", with: "Brant Faulkner")
+    page.click_button("RSVP")
+    assert page.has_content?("Brant Faulkner")
   end
 end

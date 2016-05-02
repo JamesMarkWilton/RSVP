@@ -26,7 +26,4 @@ class EventsController < ApplicationController
 
     redirect_to event_path event
   end
-
-  def show
-    @event = Event.find_by_id(params[:id]) end
 end

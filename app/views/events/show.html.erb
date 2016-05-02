@@ -7,3 +7,16 @@ Hosted by: <%= @event.host %>
 <p>On: <%= @event.datetime %></p>
 <h3>Details</h3>
 <p><%= @event.description %></p>
+
+<h3>Guests</h3>
+<% @attendees.each do |guest| %>
+  <p><%= guest.name %></p>
+<% end %>
+
+<h3>Do you want to attend this event?</h3>
+<%= form_for @attendee, url: attendees_create_path(@event) do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.submit "RSVP" %>
+<% end %>
+
