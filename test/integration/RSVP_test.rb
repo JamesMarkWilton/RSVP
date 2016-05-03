@@ -28,6 +28,7 @@ class UserIntegrationTest < ActionDispatch::IntegrationTest
     event = Event.create!(title: "Josh's Birthday Party",
                           description: "Come celebrate my birthday")
     page.visit event_path event
+    refute page.has_content?("Brant Faulkner")
 
     assert page.has_content?("Josh's Birthday Party")
     assert page.has_content?("Come celebrate my birthday")
